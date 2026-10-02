@@ -46,4 +46,24 @@ async function ask(question){if(busy||!artifact)return;ensureWorker();busy=true;
 $('#chat-form').addEventListener('submit',e=>{e.preventDefault();ask($('#question').value.trim())});
 document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>{$('#question').value=b.dataset.question;ask(b.dataset.question)}));
 async function init(){try{const response=await fetch('/data/forecasts.json');if(!response.ok)throw new Error('The forecast artifact is unavailable.');artifact=await response.json();update();const report=await fetch('/data/tabpfn-report.json').then(r=>r.json());$('#tabpfn-score').innerHTML=`${report.tabpfn_mae.toFixed(2)} <small>points</small>`;$('#baseline-score').innerHTML=`${report.baselines.mean_training_drop.toFixed(2)} <small>points</small>`;$('#coverage-score').innerHTML=`${(report.test_interval_coverage*100).toFixed(0)}<small>%</small>`;}catch(e){$('#forecast-title').textContent='Forecast unavailable';$('#forecast-subtitle').textContent=e.message;$('#plan-title').textContent='A forecast is needed first.';$('#plan-body').textContent='Check the soil in person. Please reload to retry.'}}
-init();
+function registerCareTools(){
+  const context=document.modelContext;
+  if(!context?.registerTool)return;
+  const lifecycle=new AbortController();
+  const readPlan=()=>{
+    if(!artifact)throw new Error('Forecast is still loading.');
+    return {plant:selected,days_away:awayDays,stale,signal:activeAction(),data_source:source,note:careNote()};
+  };
+  const definitions=[
+    {name:'read_care_plan',title:'Read care plan',description:'Read the visible plant, trip duration, care signal, and downloadable note. No messages are sent.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:false},execute(input){if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length)throw new Error('Expected an empty object.');return readPlan();}},
+    {name:'configure_demo_care_plan',title:'Configure demo care plan',description:'Choose a simulated plant, days away, and stale-reading state. Update the same visible forecast and care note as the controls. No messages are sent.',inputSchema:{type:'object',properties:{plant:{type:'string',enum:Object.keys(plantMeta)},days_away:{type:'integer',minimum:0,maximum:7},stale:{type:'boolean'}},required:['plant','days_away','stale'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute(input){
+      if(!artifact)throw new Error('Forecast is still loading.');
+      if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(k=>!['plant','days_away','stale'].includes(k))||!Object.hasOwn(plantMeta,input.plant)||!Number.isInteger(input.days_away)||input.days_away<0||input.days_away>7||typeof input.stale!=='boolean')throw new Error('Choose a valid demo plant, 0–7 days away, and a boolean stale flag.');
+      selected=input.plant;awayDays=input.days_away;stale=input.stale;customPoints=null;source='recorded_tabpfn';
+      $('#away-days').value=awayDays;$('#stale-sensor').checked=stale;update();return readPlan();
+    }}
+  ];
+  for(const definition of definitions){try{Promise.resolve(context.registerTool(definition,{signal:lifecycle.signal})).catch(()=>{});}catch{}}
+  window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});
+}
+init().then(registerCareTools);

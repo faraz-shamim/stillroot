@@ -1,0 +1,9 @@
+{
+  "model": "onnx-community/gemma-3-270m-it-ONNX",
+  "revision": "2dbbfdb1b59bd034eb959428c6a7da9dd7ea27f0",
+  "runtime": "webgpu",
+  "question": "What should I check before I water?",
+  "answer": "\u2733\nI should check the soil and drainage before watering to ensure it's dry.\n",
+  "status": "Answered locally by Gemma 3 270M in 7.9s. Check the soil before acting on advice.",
+  "scenario": "simulated basil, seven days away"
+}

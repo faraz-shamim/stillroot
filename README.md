@@ -4,6 +4,10 @@ A little care, less guesswork. An open AI plant-care companion built for my frie
 
 Choose a plant, explore its seven-day moisture forecast, plan time away, and save a short handoff note. A small Gemma model explains the forecast **on your device**. The project focuses on **TabPFN, Gemma, and Render**.
 
+**[Live demo](https://stillroot.onrender.com)** · **[Source code](https://github.com/faraz-shamim/stillroot)**
+
+![Stillroot's plant forecast, trip planner, local companion, and evidence panel](docs/stillroot-desktop.jpg)
+
 ## The design premise
 
 The windowsill is a creative gift scenario for Rohan, rather than a documented problem or interview. The sample plants and all history rows are simulated. No claim is made that Rohan owns these plants, supplied sensor data, or has already tested the app. Real histories can replace the demonstration CSV.
@@ -13,14 +17,14 @@ The windowsill is a creative gift scenario for Rohan, rather than a documented p
 | Component | Implementation | Where it runs |
 |---|---|---|
 | Moisture prediction | Actual TabPFN v2 regressor, two estimators | Local Python CPU; audited recorded outputs in the hosted demo |
-| Forecast explanation | Gemma 3 270M instruction model, ONNX q8 | Browser Web Worker with ONNX Runtime WASM |
+| Forecast explanation | Gemma 3 270M instruction model, ONNX q4 | Browser Web Worker with ONNX Runtime WebGPU or WASM |
 | Care signal | Readable deterministic policy | Browser; also exposed by the Python API |
 | Website | Vite, semantic HTML, CSS, vanilla JavaScript | Render free web service |
 | Custom CSV | Portable analogue baseline, or live local TabPFN | Browser by default; your explicit local runtime otherwise |
 
 The hosted demo does **not** claim to run TabPFN afresh for every slider movement. It selects recorded real inference outputs for three simulated plants. CSV uploads stay in the browser unless the user explicitly chooses the local TabPFN button. The public Render runtime never receives an uploaded CSV in that flow.
 
-Gemma downloads roughly 600 MB of model and runtime assets from Hugging Face on its first use; a recent desktop browser and sufficient memory are recommended. Questions and answers are computed locally and are not sent to an inference API. Model assets can be cached by the browser; offline operation is not guaranteed because cache retention is controlled by the browser. The interface labels model failures instead of substituting a pretend answer.
+Gemma downloads roughly 350 MB with WebGPU or 850 MB on its CPU fallback on first use; a recent desktop browser and sufficient memory are recommended. GPU and CPU conversions are pinned to separate revisions because the newer optimized embedding operator is not supported by the WASM runtime. The CPU revision is `cfd5c04f84a64766d63efc5bb1d2cf31f34a4a90`; the GPU revision is `2dbbfdb1b59bd034eb959428c6a7da9dd7ea27f0`. Questions and answers are computed locally and are not sent to an inference API. Model assets can be cached by the browser; offline operation is not guaranteed because cache retention is controlled by the browser. The interface labels model failures instead of substituting a pretend answer.
 
 ## Measured forecast experiment
 
@@ -84,6 +88,8 @@ npm run build
 ```
 
 The domain checks cover stale sensor handling, wet-soil protection, malformed CSV rejection, and bounded forecasts. API validation, plant selection, trip duration, stale readings, mobile layout, and a real Gemma answer are also verified during browser QA. The browser handoff note is copied or downloaded; it is never automatically sent to another person.
+
+The browser measurement in `docs/gemma-browser-run.json` records an actual WebGPU answer in 7.9 seconds. This is one device run, not a general speed benchmark. The mobile layout was rendered inside an actual 390 × 844 browser frame, with no horizontal overflow. The optional WebMCP tools `read_care_plan` and `configure_demo_care_plan` use the same visible app state; valid configuration and rejection of an eight-day trip were verified in the in-app browser.
 
 ## Scope and next steps
 

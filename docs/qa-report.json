@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-02",
+  "api_checks": {
+    "health_and_artifact": true,
+    "site": true,
+    "wet_soil": true,
+    "stale_override": true,
+    "range_validation": true,
+    "invalid_content_length": true,
+    "large_request": true
+  },
+  "domain_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "browser_checks": {
+    "plant_selection": true,
+    "seven_day_trip_asks_friend_to_check_soil": true,
+    "stale_reading_requires_verification": true,
+    "sample_csv_294_rows_portable_label": true,
+    "copy_note_ui_confirmation": true,
+    "real_gemma_answer": "See gemma-browser-run.json",
+    "responsive_layout": {
+      "frame_width": 390,
+      "frame_height": 844,
+      "content_width": 375,
+      "content_scroll_width": 375,
+      "horizontal_overflow": false
+    },
+    "webmcp": {
+      "read_care_plan": "passed",
+      "configure_demo_care_plan": "passed",
+      "invalid_eight_day_trip": "rejected; previous state retained"
+    }
+  }
+}
