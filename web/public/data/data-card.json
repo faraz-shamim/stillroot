@@ -1,0 +1,20 @@
+{
+  "kind": "synthetic",
+  "seed": 20261002,
+  "rows": 294,
+  "cycles": 42,
+  "purpose": "Engineering demonstration. Not validated horticultural guidance.",
+  "split": "Cycles 0\u201327 train, 28\u201334 calibrate, 35\u201341 test. No shuffled adjacent-day leakage.",
+  "features": [
+    "moisture",
+    "temperature",
+    "humidity",
+    "light_hours",
+    "pot_size",
+    "days_since_water"
+  ],
+  "target": "next_moisture",
+  "units": "relative sensor percentage",
+  "generator": "ml/make_data.py",
+  "observations_from_rohan": false
+}

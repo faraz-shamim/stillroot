@@ -1,0 +1,5 @@
+-r requirements.txt
+tabpfn==9.1.0
+numpy>=1.26
+pandas>=2
+scikit-learn>=1.5

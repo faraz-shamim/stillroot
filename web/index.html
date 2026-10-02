@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15261e">
+  <meta name="description" content="Stillroot is an open AI plant-care companion built for a friend. Explore soil forecasts, plan a trip, and ask Gemma privately on your device.">
+  <title>Stillroot · A little care, less guesswork</title>
+  <link rel="icon" type="image/svg+xml" href="/sprout.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to your plants</a>
+  <header class="header"><a class="brand" href="/" aria-label="Stillroot home"><img src="/sprout.svg" alt="">stillroot<span class="brand-dot">.</span></a>
+    <nav aria-label="Main navigation"><a href="#main" class="active">My windowsill</a><a href="#assistant">Plant companion</a><a href="#evidence">Behind the forecast</a></nav>
+    <span class="avatar" aria-label="Built for Rohan">R</span>
+  </header>
+  <main id="main">
+    <div class="page-heading"><div><p class="eyebrow">A LITTLE CARE, LESS GUESSWORK</p><h1>Rohan’s windowsill<span class="sun">☀</span></h1><p class="muted">Room to grow. Even when life gets busy.</p></div><button class="button light" id="reset">Reset demo</button></div>
+    <div class="demo-note"><span class="pill">Interactive demo</span><p>Explore three simulated plants. Forecasts are recorded TabPFN predictions from a synthetic CSV.</p><a href="/data/synthetic_history.csv" download>Get the sample CSV</a></div>
+    <section class="garden-grid" aria-label="Plant care workspace">
+      <article class="plant-card"><div class="plant-card-top"><span class="eyebrow">YOUR PLANTS</span><span class="small">01 / 03</span></div>
+        <div class="plant-tabs" role="group" aria-label="Choose a plant"><button class="plant-tab selected" data-plant="pothos" aria-pressed="true">Pothos</button><button class="plant-tab" data-plant="monstera" aria-pressed="false">Monstera</button><button class="plant-tab" data-plant="basil" aria-pressed="false">Basil</button></div>
+        <div class="plant-art" id="plant-art" aria-hidden="true"></div>
+        <div class="plant-name"><div><h2 id="plant-name">Golden pothos</h2><p id="plant-location">The easygoing one by the window</p></div><span class="plant-number">01</span></div>
+        <div class="plant-stats"><div><span class="label">Soil moisture</span><strong><span id="moisture">—</span><small>%</small></strong></div><div><span class="label">Temperature</span><strong><span id="temperature">—</span><small>°C</small></strong></div><div><span class="label">Humidity</span><strong><span id="humidity">—</span><small>%</small></strong></div></div>
+      </article>
+      <div class="forecast-stack"><article class="forecast-card"><div class="card-heading"><div><p class="eyebrow">LOOKING AHEAD</p><h2>A little foresight.</h2></div><span class="model-label">TabPFN v2</span></div>
+        <div class="forecast-summary"><strong id="forecast-title">Loading the forecast…</strong><p id="forecast-subtitle" class="muted">Reading the measured model artifact.</p></div>
+        <div class="chart-wrap"><svg id="forecast-chart" viewBox="0 0 610 230" role="img" aria-label="Soil moisture forecast for the next seven days"></svg></div>
+        <div class="chart-legend"><span><i class="legend-line"></i>Predicted moisture</span><span><i class="legend-band"></i>Estimated range</span><span><i class="legend-dash"></i>Check soil at 22%</span></div>
+        <p class="chart-note">One-day range uses calibration residuals. The widening multi-day range is a heuristic, not a guarantee.</p>
+      </article>
+      <article class="travel-card"><div class="travel-heading"><span class="icon-bag" aria-hidden="true">⌑</span><div><h2>Heading out?</h2><p class="muted">Give your plants a plan for the time you’re away.</p></div><output id="days-output" for="away-days">3 days</output></div>
+        <label class="sr-only" for="away-days">Days away</label><input type="range" id="away-days" min="0" max="7" value="3"><div class="range-labels"><span>Staying home</span><span>A full week</span></div>
+        <div class="care-plan" aria-live="polite"><span class="plan-icon" id="plan-icon" aria-hidden="true">✓</span><div><strong id="plan-title">Making your plan…</strong><p id="plan-body"></p></div></div>
+        <div class="plan-actions"><button class="button dark" id="copy-plan">Copy care note</button><button class="text-button" id="download-plan">Save plan</button><span id="copy-status" role="status"></span></div>
+      </article></div>
+    </section>
+    <section class="second-grid">
+      <article class="assistant-card" id="assistant"><div class="card-heading"><div><p class="eyebrow">YOUR QUIET COMPANION</p><h2>Ask. Understand. Grow.</h2></div><span class="local-badge"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 9V6a5 5 0 0 1 10 0v3M4 9h12v9H4z"/></svg>On your device</span></div>
+        <p class="muted">Gemma turns your plant’s numbers into a conversation. Your questions stay in this browser.</p>
+        <div class="chat-output" id="chat-output" role="status" aria-live="polite"><span class="chat-mark" aria-hidden="true">✳</span><div><strong>Small model. A thoughtful companion.</strong><p>Load Gemma once, then ask about the current forecast. The first download is around 600 MB; no API key is needed.</p></div></div>
+        <div class="suggestions"><button data-question="What should I check before I water?">Before I water</button><button data-question="Explain this forecast in one simple sentence.">Explain my forecast</button><button data-question="What should I tell a friend looking after this plant?">A note for a friend</button></div>
+        <form id="chat-form"><label class="sr-only" for="question">Ask about your plant</label><input id="question" placeholder="What’s my plant trying to tell me?" maxlength="500" autocomplete="off"><button class="button dark" type="submit" id="ask-button">Load Gemma</button></form>
+        <p class="fine-print" id="model-status">Gemma 3 · 270M · local WASM inference. A compact model can make mistakes; check the soil before watering.</p>
+      </article>
+      <article class="signal-card"><div class="card-heading"><div><p class="eyebrow">A GLANCE IS ENOUGH</p><h2>A calm care signal.</h2></div><span class="pill muted-pill">Signal preview</span></div>
+        <div class="device-art"><div class="device-cable"></div><div class="device"><div class="device-label">STILLROOT / CARE</div><div class="led-ring" id="led-ring"><span></span></div><div class="device-bottom"><span>soil • care • calm</span><i></i><i></i></div></div><div class="device-shadow"></div></div>
+        <strong id="device-signal">WAIT</strong><p id="device-description" class="muted">A calm cue, based on your care plan.</p>
+        <label class="toggle"><input type="checkbox" id="stale-sensor"><span>Simulate a stale sensor reading</span></label>
+        <p class="fine-print">An interactive care cue for the simulated plants. Stale readings always ask you to check the sensor before trusting a forecast.</p>
+      </article>
+    </section>
+    <section class="evidence-card" id="evidence"><div class="evidence-top"><div><p class="eyebrow">OPEN MODELS. INSPECTABLE WORK.</p><h2>Every forecast has a paper trail.</h2></div><a class="button light" href="https://github.com/faraz-shamim/stillroot" target="_blank" rel="noreferrer">Explore the code</a></div>
+      <div class="evidence-metrics" id="metrics"><div><span class="label">Sample history</span><strong>294 <small>synthetic rows</small></strong><p>Entire watering cycles held out</p></div><div><span class="label">TabPFN test error</span><strong id="tabpfn-score">—</strong><p>Moisture points · lower is better</p></div><div><span class="label">Simple baseline error</span><strong id="baseline-score">—</strong><p>Mean drop from training cycles</p></div><div><span class="label">One-day range coverage</span><strong id="coverage-score">—</strong><p>Measured on 49 held-out readings</p></div></div>
+      <details><summary>How the models work together</summary><div class="details-grid"><div><h3>Forecast, then explain</h3><p>TabPFN estimates the next moisture reading from past conditions. A small action policy turns uncertainty and time away into a care cue. Gemma explains that cue locally; it does not choose a watering amount.</p></div><div><h3>Honest about the demo</h3><p>This dataset is generated for a reproducible engineering test. It is not Rohan’s real plant history. Recorded TabPFN predictions power the three sample plants. An uploaded CSV uses a labeled portable baseline unless you run the local TabPFN service.</p></div><div><h3>Care you can inspect</h3><p>The care signal is a small, readable policy. Old readings require verification, wet soil never prompts a watering request, and a dry travel forecast suggests a friend check the soil. Gemma explains the result; it cannot change the policy.</p></div></div><div class="evidence-links"><a href="/data/tabpfn-report.json" target="_blank">TabPFN measurements</a><a href="/data/data-card.json" target="_blank">Dataset card</a></div></details>
+      <details><summary>Try your own CSV history</summary><p>Use the sample schema. Processing stays in your browser for the portable baseline; local TabPFN requires the Python runtime. Your file is never automatically uploaded.</p><div class="upload-row"><label class="button light" for="csv-upload">Choose a CSV</label><input id="csv-upload" type="file" accept=".csv,text/csv" class="sr-only"><button class="button dark" id="local-forecast" disabled>Run local TabPFN</button><span id="csv-status" role="status">No file selected</span></div></details>
+    </section>
+    <footer><a class="brand" href="/">stillroot<span class="brand-dot">.</span></a><p>Built for Rohan · Hacktoberfest 2026 · Open code, open possibilities.</p><a href="https://dev.to/challenges/hacktoberfest-weekend-2026-10-01" target="_blank" rel="noreferrer">Build for a Friend</a></footer>
+  </main><script type="module" src="/app.js"></script>
+</body></html>

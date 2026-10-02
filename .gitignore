@@ -1,0 +1,13 @@
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+models/
+.secrets/
+.runtime/
+*.log
+*-request.jpg

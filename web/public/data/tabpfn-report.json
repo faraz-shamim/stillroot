@@ -1,0 +1,24 @@
+{
+  "status": "measured",
+  "model": "TabPFN v2",
+  "data_kind": "synthetic",
+  "seed": 20261002,
+  "train_rows": 196,
+  "calibration_rows": 49,
+  "test_rows": 49,
+  "split": "Whole watering cycles: train 0\u201327; calibration 28\u201334; held-out test 35\u201341",
+  "metric": "MAE in relative moisture percentage points (lower is better)",
+  "tabpfn_mae": 0.4889965583718396,
+  "baselines": {
+    "last_reading": 6.298571428571428,
+    "mean_training_drop": 0.9766222407330286
+  },
+  "interval_half_width": 1.13995585079779,
+  "test_interval_coverage": 0.9183673469387755,
+  "fit_seconds": 22.206247100009932,
+  "test_inference_seconds": 1.4244962999946438,
+  "checkpoint": "Prior-Labs/TabPFN-v2-reg",
+  "license": "Prior Labs License (Apache 2.0 + attribution)",
+  "limitations": "Synthetic engineering test; not real-world plant validation. Multi-day intervals are heuristic, not calibrated guarantees.",
+  "source_sha256": "ea75afdf096d09681363bbb6e0a45bbac94de8107d7b6706ba6914317f32cd72"
+}

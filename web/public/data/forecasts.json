@@ -1,0 +1,186 @@
+{
+  "source": "recorded_tabpfn",
+  "model": "TabPFN v2",
+  "data_kind": "synthetic",
+  "note": "These are genuine recorded local model outputs. Scenario controls select recorded forecasts; they do not rerun TabPFN in the cloud.",
+  "interval_note": "90% split-conformal one-day residual interval; sqrt(day) expansion is a multi-day heuristic.",
+  "scenarios": [
+    {
+      "id": "pothos",
+      "source": "recorded_tabpfn",
+      "current": 49.0,
+      "temperature": 24.0,
+      "humidity": 48.0,
+      "light_hours": 5.0,
+      "pot_size": 16.0,
+      "points": [
+        {
+          "day": 0,
+          "mean": 49.0,
+          "lower": 49.0,
+          "upper": 49.0
+        },
+        {
+          "day": 1,
+          "mean": 42.94,
+          "lower": 41.8,
+          "upper": 44.08
+        },
+        {
+          "day": 2,
+          "mean": 36.91,
+          "lower": 35.3,
+          "upper": 38.53
+        },
+        {
+          "day": 3,
+          "mean": 31.28,
+          "lower": 29.3,
+          "upper": 33.25
+        },
+        {
+          "day": 4,
+          "mean": 25.28,
+          "lower": 23.0,
+          "upper": 27.56
+        },
+        {
+          "day": 5,
+          "mean": 19.66,
+          "lower": 17.11,
+          "upper": 22.21
+        },
+        {
+          "day": 6,
+          "mean": 13.98,
+          "lower": 11.19,
+          "upper": 16.77
+        },
+        {
+          "day": 7,
+          "mean": 8.33,
+          "lower": 5.31,
+          "upper": 11.34
+        }
+      ]
+    },
+    {
+      "id": "monstera",
+      "source": "recorded_tabpfn",
+      "current": 62.0,
+      "temperature": 23.0,
+      "humidity": 57.0,
+      "light_hours": 4.0,
+      "pot_size": 20.0,
+      "points": [
+        {
+          "day": 0,
+          "mean": 62.0,
+          "lower": 62.0,
+          "upper": 62.0
+        },
+        {
+          "day": 1,
+          "mean": 57.09,
+          "lower": 55.95,
+          "upper": 58.23
+        },
+        {
+          "day": 2,
+          "mean": 52.22,
+          "lower": 50.61,
+          "upper": 53.83
+        },
+        {
+          "day": 3,
+          "mean": 47.33,
+          "lower": 45.35,
+          "upper": 49.3
+        },
+        {
+          "day": 4,
+          "mean": 42.12,
+          "lower": 39.84,
+          "upper": 44.4
+        },
+        {
+          "day": 5,
+          "mean": 37.48,
+          "lower": 34.94,
+          "upper": 40.03
+        },
+        {
+          "day": 6,
+          "mean": 33.17,
+          "lower": 30.38,
+          "upper": 35.96
+        },
+        {
+          "day": 7,
+          "mean": 28.71,
+          "lower": 25.7,
+          "upper": 31.73
+        }
+      ]
+    },
+    {
+      "id": "basil",
+      "source": "recorded_tabpfn",
+      "current": 37.0,
+      "temperature": 27.0,
+      "humidity": 40.0,
+      "light_hours": 6.0,
+      "pot_size": 12.0,
+      "points": [
+        {
+          "day": 0,
+          "mean": 37.0,
+          "lower": 37.0,
+          "upper": 37.0
+        },
+        {
+          "day": 1,
+          "mean": 28.71,
+          "lower": 27.57,
+          "upper": 29.85
+        },
+        {
+          "day": 2,
+          "mean": 20.42,
+          "lower": 18.81,
+          "upper": 22.03
+        },
+        {
+          "day": 3,
+          "mean": 12.15,
+          "lower": 10.18,
+          "upper": 14.13
+        },
+        {
+          "day": 4,
+          "mean": 3.93,
+          "lower": 1.65,
+          "upper": 6.21
+        },
+        {
+          "day": 5,
+          "mean": 0.0,
+          "lower": 0,
+          "upper": 2.55
+        },
+        {
+          "day": 6,
+          "mean": 0.0,
+          "lower": 0,
+          "upper": 2.79
+        },
+        {
+          "day": 7,
+          "mean": 0.0,
+          "lower": 0,
+          "upper": 3.02
+        }
+      ]
+    }
+  ]
+}
