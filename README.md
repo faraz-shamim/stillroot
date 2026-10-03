@@ -4,7 +4,7 @@ A little care, less guesswork. An open AI plant-care companion built for my frie
 
 Choose a plant, explore its seven-day moisture forecast, plan time away, and save a short handoff note. A small Gemma model explains the forecast **on your device**. The project focuses on **TabPFN, Gemma, and Render**.
 
-**[Live demo](https://stillroot.onrender.com)** · **[Source code](https://github.com/faraz-shamim/stillroot)**
+**[Live demo](https://stillroot.onrender.com)** · **[Source code](https://github.com/faraz-shamim/stillroot)** · **[Published DEV submission](https://dev.to/faraz_s_0a6e70a4bbdc6622/stillroot-a-quiet-plant-companion-for-my-friend-rohan-1j26)**
 
 ![Stillroot's plant forecast, trip planner, local companion, and evidence panel](docs/stillroot-desktop.jpg)
 
@@ -80,6 +80,8 @@ Connect the public GitHub repository on Render and create a **free** Python web 
 
 The free runtime does not install Torch or host model weights. Gemma inference runs in the visitor's browser. Free Render services may sleep when idle and need time to wake. No paid instance, subscription, GPU, or API key is required.
 
+The current service uses a public Git repository URL and manual deployment. After changing the app on `main`, choose **Manual Deploy → Deploy latest commit** in Render.
+
 ## Checks
 
 ```powershell
@@ -90,6 +92,8 @@ npm run build
 The domain checks cover stale sensor handling, wet-soil protection, malformed CSV rejection, and bounded forecasts. API validation, plant selection, trip duration, stale readings, mobile layout, and a real Gemma answer are also verified during browser QA. The browser handoff note is copied or downloaded; it is never automatically sent to another person.
 
 The browser measurement in `docs/gemma-browser-run.json` records an actual WebGPU answer in 7.9 seconds. This is one device run, not a general speed benchmark. The mobile layout was rendered inside an actual 390 × 844 browser frame, with no horizontal overflow. The optional WebMCP tools `read_care_plan` and `configure_demo_care_plan` use the same visible app state; valid configuration and rejection of an eight-day trip were verified in the in-app browser.
+
+The deployed HTTPS app also returned a real Gemma answer in 3.3 seconds on October 3, recorded in `docs/gemma-production-run.json`. Publication links, entered categories, and the verified deployment are recorded in `docs/publication.json`.
 
 ## Scope and next steps
 

@@ -1,0 +1,30 @@
+{
+  "title": "Stillroot: a quiet plant companion for my friend Rohan",
+  "status": "published",
+  "published_on": "2026-10-03",
+  "submission_url": "https://dev.to/faraz_s_0a6e70a4bbdc6622/stillroot-a-quiet-plant-companion-for-my-friend-rohan-1j26",
+  "challenge_url": "https://dev.to/challenges/hacktoberfest-weekend-2026-10-01",
+  "tags": [
+    "devchallenge",
+    "weekendchallenge",
+    "hf26challenge"
+  ],
+  "categories": [
+    "Best Use of TabPFN",
+    "Best Use of Gemma",
+    "Best Use of Render"
+  ],
+  "demo_url": "https://stillroot.onrender.com/",
+  "repository_url": "https://github.com/faraz-shamim/stillroot",
+  "deployed_code_commit": "667db6c85898d3fc283589b553d0830342b6630f",
+  "render_deploy_id": "dep-db0ds5lg1s2s73dle3jg",
+  "render_status": "Deploy succeeded|Live",
+  "paid_spending_usd": 0,
+  "footer_verification": "Only the Stillroot home link remains; challenge copy and challenge link removed.",
+  "evidence": [
+    "gemma-browser-run.json",
+    "gemma-production-run.json",
+    "qa-report.json"
+  ],
+  "disclosures": "Creative friend scenario, simulated plants, synthetic dataset, recorded TabPFN inference, and AI assistance are disclosed in the submission."
+}

@@ -1,0 +1,11 @@
+{
+  "checked_on": "2026-10-03",
+  "url": "https://stillroot.onrender.com/",
+  "model": "onnx-community/gemma-3-270m-it-ONNX",
+  "revision": "2dbbfdb1b59bd034eb959428c6a7da9dd7ea27f0",
+  "runtime": "webgpu",
+  "question": "What should I check before I water?",
+  "answer": "✳\nI should check the soil and drainage before watering to ensure it's dry.\n",
+  "status": "Answered locally by Gemma 3 270M in 3.3s. Check the soil before acting on advice.",
+  "note": "One real response from the deployed HTTPS application; timings depend on the visitor’s device."
+}
